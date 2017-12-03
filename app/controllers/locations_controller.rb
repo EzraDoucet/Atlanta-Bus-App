@@ -17,7 +17,7 @@ class LocationsController < ApplicationController
     # Use our helper method to parse the data into an array of all buses in the system
     @buses = fetch_buses_from_api(bus_api_url)
 
-    @buses.select! { |bus| is_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
+    @buses.select! { |bus| is_06mi_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
   end
 
   # GET /locations/new

@@ -8,9 +8,27 @@ module LocationsHelper
 
   # Return true if a bus is near to the user and false otherwise.
 
-  def is_nearby?(user_lat, user_long, bus_lat, bus_long)
+  def is_06mi_nearby?(user_lat, user_long, bus_lat, bus_long)
     # Max distance in degrees, approx 0.6 miles
     max_distance = 0.01
+    difference_latitudes = user_lat - bus_lat.to_f
+    difference_longitudes = user_long - bus_long.to_f
+    distance = Math.sqrt(difference_latitudes**2 + difference_longitudes**2)
+    distance <= max_distance
+  end
+
+  def is_02mi_nearby?(user_lat, user_long, bus_lat, bus_long)
+    # Max distance in degrees, approx 0.2 miles
+    max_distance = 0.005
+    difference_latitudes = user_lat - bus_lat.to_f
+    difference_longitudes = user_long - bus_long.to_f
+    distance = Math.sqrt(difference_latitudes**2 + difference_longitudes**2)
+    distance <= max_distance
+  end
+
+  def is_1mi_nearby?(user_lat, user_long, bus_lat, bus_long)
+    # Max distance in degrees, approx 1 miles
+    max_distance = 0.1
     difference_latitudes = user_lat - bus_lat.to_f
     difference_longitudes = user_long - bus_long.to_f
     distance = Math.sqrt(difference_latitudes**2 + difference_longitudes**2)
