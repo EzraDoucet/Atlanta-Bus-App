@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+  include LocationsHelper
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   # GET /locations
@@ -10,6 +11,13 @@ class LocationsController < ApplicationController
   # GET /locations/1
   # GET /locations/1.json
   def show
+    # MARTA API URL
+    bus_api_url = "http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus"
+
+    # Use our helper method to parse the data into an array of all buses in the system
+    @buses = fetch_buses_from_api(bus_api_url)
+
+    @buses.select! { |bus| is_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
   end
 
   # GET /locations/new

@@ -1,26 +1,29 @@
-<div class="lefted">
-<p id="notice"><%= notice %></p>
+<div class="container lefted">
+ <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Street address:</strong>
-  <%= @location.street_address %>
-</p>
+ <h1>Busses Bayou Right Now!</h1>
 
-<p>
-  <strong>City:</strong>
-  <%= @location.city %>
-</p>
+ <h3 class="text-muted">Where You At</h3>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @location.latitude %>
-</p>
+ <p class="text-muted">
+   <%= @location.full_street_address %> <small><%= link_to fa_icon('pencil', text: ''), edit_location_path(@location) %></small>
+ </p>
 
-<p>
-  <strong>Longitude:</strong>
-  <%= @location.longitude %>
-</p>
+ <h3>Busses Closest to Ya</h3>
+ <% @buses.each do |bus| %>
+   <p>
+     <strong>Route:</strong> <%= bus["ROUTE"] %> <%= bus["DIRECTION"] %><br>
+     <strong>Bus Number:</strong> <%= bus["VEHICLE"] %><br>
+     <strong>Next Stop: </strong> <%= bus["TIMEPOINT"] %><br>
+   </p>
+ <% end %>
 
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Back', locations_path %>
+ <% if @buses.empty? %>
+   <p>
+     Not really that close. :( Time to walk, bike, taxi, Uber, or magically <%= link_to 'edit ', edit_location_path(@location) %> where you at.
+   </p>
+ <% end %>
+
+ <%= link_to 'Edit', edit_location_path(@location), class: 'btn btn-sm btn-info' %>
+ <%#= link_to 'Back', locations_path, class: 'btn btn-sm btn-danger' %>
 </div>
