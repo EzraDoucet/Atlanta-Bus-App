@@ -17,7 +17,13 @@ class LocationsController < ApplicationController
     # Use our helper method to parse the data into an array of all buses in the system
     @buses = fetch_buses_from_api(bus_api_url)
 
-    @buses.select! { |bus| is_06mi_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
+    if @location.distance == 0.06
+      @buses.select! { |bus| is_06mi_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
+    elsif @location.distance == 0.02
+      @buses.select! { |bus| is_02mi_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
+    elsif @location.distance == 1.0
+      @buses.select! { |bus| is_1mi_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
+    end
   end
 
   # GET /locations/new
@@ -77,6 +83,6 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:street_address, :city, :latitude, :longitude)
+      params.require(:location).permit(:street_address, :city, :latitude, :longitude, :distance)
     end
 end
