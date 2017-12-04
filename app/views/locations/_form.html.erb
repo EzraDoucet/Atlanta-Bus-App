@@ -6,7 +6,7 @@
 
         <div class="form-inputs">
           <%= f.input :street_address, label: "What Street You On?" %>
-          <%= f.input :city, label: "What City You In?", collection: ['Atlanta', 'Roswell', 'Alpharett', 'South DeKalb'], selected: 'Atlanta' %>
+          <%= f.input :city, label: "What City You In?", collection: Location::MARTA_CITIES, selected: 'Atlanta' %>
           <%= f.input :distance, label: "How Far You Wanna Walk?", collection: [0.02, 0.06, 1.0], selected: 0.06 %>
         </div>
 
