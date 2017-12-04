@@ -16,6 +16,7 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 @import 'font-awesome';
+@import 'locations';
 
 
 .centered {
@@ -24,5 +25,11 @@
 
 .lefted {
  text-align: left;
+ clear: right;
+
 }
+
+// .p {
+//  margin-right: 1px;
+// }
 

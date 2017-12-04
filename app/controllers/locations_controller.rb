@@ -15,14 +15,14 @@ class LocationsController < ApplicationController
     bus_api_url = "http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus"
 
     # Use our helper method to parse the data into an array of all buses in the system
-    @buses = fetch_buses_from_api(bus_api_url)
+    @busses = fetch_buses_from_api(bus_api_url)
 
     if @location.distance == 0.06
-      @buses.select! { |bus| is_06mi_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
+      @busses.select! { |bus| is_06mi_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
     elsif @location.distance == 0.02
-      @buses.select! { |bus| is_02mi_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
+      @busses.select! { |bus| is_02mi_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
     elsif @location.distance == 1.0
-      @buses.select! { |bus| is_1mi_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
+      @busses.select! { |bus| is_1mi_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])}
     end
   end
 
