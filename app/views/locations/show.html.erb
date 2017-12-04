@@ -12,7 +12,7 @@
    </p>
    <div id="map-canvas">
    </div>
-   <h3>Busses <%= @location.distance %> Miles Away From Ya</h3>
+   <h3 style='float: right'>Busses <%= @location.distance %> Miles Away From Ya</h3>
    <% @busses.each do |bus| %>
      <p>
        <strong>Route:</strong> <%= bus["ROUTE"] %> <%= bus["DIRECTION"] %><br>
@@ -82,7 +82,17 @@
     content: contentString
    });
 
+   var myString = `<div id="mycontent">
+     <h2><%= @location.full_street_address %></h2>
+    </div>`
 
+   var myInfoWindow = new google.maps.InfoWindow({
+    content: myString
+   });
+
+   google.maps.event.addDomListener(myMarker, 'click', function() {
+    myInfoWindow.open(map, myMarker);
+   });
    google.maps.event.addDomListener(busMarker, 'click', function() {
     infoWindow.open(map, busMarker);
    });
@@ -92,6 +102,5 @@
  }
  google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-
 
 
