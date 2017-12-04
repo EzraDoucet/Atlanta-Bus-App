@@ -1,7 +1,7 @@
 <div class="container lefted">
  <p id="notice"><%= notice %></p>
 
- <h1>Busses <%= @distance %> Bayou Right Now!</h1>
+ <h1>Busses Bayou Right Now!</h1>
 
  <h3 class="text-muted">Where You At</h3>
 
@@ -9,7 +9,7 @@
    <%= @location.full_street_address %> <small><%= link_to fa_icon('pencil', text: ''), edit_location_path(@location) %></small>
  </p>
 
- <h3>Busses Closest to Ya</h3>
+ <h3>Busses <%= @location.distance %> Miles Away From Ya</h3>
  <% @buses.each do |bus| %>
    <p>
      <strong>Route:</strong> <%= bus["ROUTE"] %> <%= bus["DIRECTION"] %><br>
